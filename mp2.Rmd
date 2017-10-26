@@ -17,3 +17,7 @@ load("contributions.rda")
 ```
 
 This is Clara's contribution for lab 13! My terminal isn't working but maybe this will! (Update from 5 minutes later: it did *not* work.)
+
+This is Emma's modification to mp2! 
+Hey! this is Kara's edit!! hell YEAH
+wowowowowowowowwowowowo
