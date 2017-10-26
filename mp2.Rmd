@@ -5,7 +5,6 @@ date: "October 31, 2017"
 output: html_document
 ---
 
-
 ## Loading the data
 
 This project is so interesting and relevant to my life!
@@ -16,3 +15,5 @@ load("candidates.rda")
 load("committees.rda")
 load("contributions.rda")
 ```
+
+This is Clara's contribution for lab 13! My terminal isn't working but maybe this will! (Update from 5 minutes later: it did *not* work.)
