@@ -25,3 +25,6 @@ general_house <- house_elections %>%
   filter(general_votes != 0)
 ```
 
+```{r}
+house_candidates <- filter(candidates, cand_office == "H")
+```
