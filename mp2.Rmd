@@ -30,3 +30,6 @@ num_candidates <- general_house %>%
   filter(N != 1)
 ```
 
+```{r}
+house_candidates <- filter(candidates, cand_office == "H")
+```
