@@ -69,4 +69,5 @@ big_ca_contributions <- ca_house_contributions %>%
 
 ```{r}
 small_ca_contributions <- unique(big_ca_contributions)
+#gets rid of duplicates from big_ca_contributions
 ```
