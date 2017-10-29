@@ -22,7 +22,7 @@ library(tidyverse)
 
 ```{r}
 general_house <- house_elections %>%
-  filter(general_votes != 0) %>% #filter the house_elections data down to only the general elections
+  filter(general_votes != 0) #filter the house_elections data down to only the general elections
 num_candidates <- general_house %>%
   arrange(state, district) %>%
   group_by(state, district) %>%
