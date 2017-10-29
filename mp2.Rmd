@@ -22,14 +22,15 @@ library(tidyverse)
 
 ```{r}
 general_house <- house_elections %>%
-  filter(general_votes != 0) #filter the house_elections data down to only the general elections
+  filter(general_votes != 0) %>% #filter the house_elections data down to only the general elections
 num_candidates <- general_house %>%
   arrange(state, district) %>%
   group_by(state, district) %>%
-  summarize(N = n()) %>%
-  filter(N != 1)
+  summarize(N = n()) %>% #number of candidates in a district
+  filter(N == 1) #1 candidate means there was only one candidate running in that district
+# num_candidates looks at how many candidates ran unopposed in the house election. Since there are only eight who ran unoppoosed, and we are looking primarily at California, we decided that we did not need to make a change to the data based on that information.
 ```
 
 ```{r}
-house_candidates <- filter(candidates, cand_office == "H")
+house_candidates <- filter(candidates, cand_office == "H") #filter so that the candidates table only includes candidates running for the house of representatives
 ```
