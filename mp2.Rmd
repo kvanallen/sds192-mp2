@@ -57,7 +57,8 @@ ca_house_contributions <- small_house_contributions %>%
 ```{r}
 total_amount_tbl <- ca_house_contributions %>%
   group_by(candidate_name, transaction_type) %>%
-  summarize(total_amount = sum(transaction_amt))
+  summarize(total_amount = sum(transaction_amt)) %>%
+  filter(!is.na(transaction_type))
 ```
 
 ```{r}
