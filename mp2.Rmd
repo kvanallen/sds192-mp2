@@ -87,3 +87,8 @@ ca_districts <- districts_eliminate %>%
   full_join(contributions_eliminate, by = c("district", "district"))
   #includes only districts that have both 24E for winners and 24A for losers
 ```
+
+```{r}
+ggplot()
+```
+
