@@ -98,7 +98,7 @@ ggplot()
 =======
 ```{r}
 ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
-  geom_area(position = "fill")
+  geom_bar(stat = "identity", position = "fill")
 ```
 >>>>>>> 9ad5da2e6ae20531c83821f4fac9d9dc5813c890
 
