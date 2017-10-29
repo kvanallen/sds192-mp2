@@ -74,12 +74,16 @@ small_ca_contributions <- unique(big_ca_contributions)
 
 ```{r}
 contributions_eliminate <- small_ca_contributions %>%
-  filter((ge_winner == "W" & transaction_type.y == "24E") | (ge_winner == "N" & transaction_type.y == "24A")) #selects only 24E contributions for winners and 24A contributions for losers
+  filter((ge_winner == "W" & transaction_type.y == "24E") | (ge_winner == "N" & transaction_type.y == "24A"))
+#selects only 24E contributions for winners and 24A contributions for losers
 ```
 
 ```{r}
 districts_eliminate <- contributions_eliminate %>%
   group_by(district) %>%
   summarize(N = n()) %>%
-  filter(N == 2) #includes only districts that have both 24E for winners and 24A for losers
+  filter(N == 2)
+ca_districts <- districts_eliminate %>%
+  full_join(contributions_eliminate, by = c("district", "district"))
+  #includes only districts that have both 24E for winners and 24A for losers
 ```
