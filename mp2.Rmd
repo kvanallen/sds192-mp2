@@ -35,17 +35,16 @@ num_candidates <- general_house %>%
 house_candidates <- filter(candidates, cand_office == "H") #filter so that the candidates table only includes candidates running for the house of representatives
 ```
 
-
 ```{r}
 small_house <- general_house %>%
   full_join(house_candidates, by = c("fec_id" = "cand_id")) %>%
-  select(fec_id, state, district, incumbent, candidate_name, party, general_votes, ge_winner)
+  select(fec_id, state, district, incumbent, candidate_name, party, general_votes, ge_winner) #join general_house and house_candidates to connect information about election results
 ```
 
 ```{r}
 small_house_contributions <- small_house %>%
   full_join(contributions, by = c("fec_id" = "cand_id")) %>%
-  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt)
+  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt) #join small_house and contributions to connect election results, candidates, and contributions
 ```
 
 ```{r}
@@ -57,11 +56,11 @@ ca_house_contributions <- small_house_contributions %>%
 ```{r}
 total_amount_tbl <- ca_house_contributions %>%
   group_by(candidate_name, transaction_type) %>%
-  summarize(total_amount = sum(transaction_amt))
+  summarize(total_amount = sum(transaction_amt)) #condenses ca_house_contributions so that there is one row per candidate per contribution type
 ```
 
 ```{r}
 small_ca_contributions <- ca_house_contributions %>%
   full_join(total_amount_tbl, by = c("candidate_name" = "candidate_name")) %>%
-  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type.y, total_amount)
+  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type.y, total_amount) #joins ca_house_contributions with total_amount_tbl to get the information of the former with the total from the latter
 ```
