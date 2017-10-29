@@ -28,9 +28,27 @@ num_candidates <- general_house %>%
   group_by(state, district) %>%
   summarize(N = n()) %>% #number of candidates in a district
   filter(N == 1) #1 candidate means there was only one candidate running in that district
-# num_candidates looks at how many candidates ran unopposed in the house election. Since there are only eight who ran unoppoosed, and we are looking primarily at California, we decided that we did not need to make a change to the data based on that information.
+# num_candidates looks at how many candidates ran unopposed in the house election. Since there are only eight who ran unoppoosed, and we are looking primarily at California, we decided that we did not need to make a change to the data based on that information. 
 ```
 
 ```{r}
+<<<<<<< HEAD
 house_candidates <- filter(candidates, cand_office == "H") #filter so that the candidates table only includes candidates running for the house of representatives
 ```
+=======
+house_candidates <- filter(candidates, cand_office == "H")
+```
+
+```{r}
+small_house <- general_house %>%
+  full_join(house_candidates, by = c("fec_id" = "cand_id")) %>%
+  select(fec_id, state, district, incumbent, candidate_name, party, general_votes, ge_winner)
+```
+
+```{r}
+small_house_contributions <- small_house %>%
+  full_join(contributions, by = c("fec_id" = "cand_id")) %>%
+  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt)
+```
+
+>>>>>>> 43fb9f76309c0d766ced9ded4c2b9eb0bca80bfb
