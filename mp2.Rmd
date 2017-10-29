@@ -33,3 +33,16 @@ num_candidates <- general_house %>%
 ```{r}
 house_candidates <- filter(candidates, cand_office == "H")
 ```
+
+```{r}
+small_house <- general_house %>%
+  full_join(house_candidates, by = c("fec_id" = "cand_id")) %>%
+  select(fec_id, state, district, incumbent, candidate_name, party, general_votes, ge_winner)
+```
+
+```{r}
+small_house_contributions <- small_house %>%
+  full_join(contributions, by = c("fec_id" = "cand_id")) %>%
+  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt)
+```
+
