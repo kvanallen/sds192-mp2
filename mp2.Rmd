@@ -85,14 +85,22 @@ districts_eliminate <- contributions_eliminate %>%
   filter(N == 2)
 ca_districts <- districts_eliminate %>%
   inner_join(contributions_eliminate, by = c("district", "district"))
+ca_districts$transaction_type.y <- factor(ca_districts$transaction_type.y)
   #includes only districts that have both 24E for winners and 24A for losers
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ```{r}
 ggplot()
 ```
 =======
+=======
+```{r}
+ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
+  geom_area(position = "fill")
+```
+>>>>>>> 9ad5da2e6ae20531c83821f4fac9d9dc5813c890
 
 >>>>>>> 5db2b594d8b3883123c129417556735cd3306b51
 
