@@ -35,6 +35,7 @@ num_candidates <- general_house %>%
 house_candidates <- filter(candidates, cand_office == "H") #filter so that the candidates table only includes candidates running for the house of representatives
 ```
 
+
 ```{r}
 small_house <- general_house %>%
   full_join(house_candidates, by = c("fec_id" = "cand_id")) %>%
@@ -48,14 +49,20 @@ small_house_contributions <- small_house %>%
 ```
 
 ```{r}
-total_amount_tbl <- small_house_contributions %>%
+ca_house_contributions <- small_house_contributions %>%
+  filter(state.x == "CA", transaction_type == "24A" | transaction_type == "24E")
+#bring the house contributions table down to California, and only transactions of type 24A and 24E
+```
+
+```{r}
+total_amount_tbl <- ca_house_contributions %>%
   group_by(candidate_name, transaction_type) %>%
   summarize(total_amount = sum(transaction_amt)) %>%
   filter(!is.na(transaction_type))
 ```
 
 ```{r}
-smaller_house_contributions <- small_house_contributions %>%
+small_ca_contributions <- ca_house_contributions %>%
   full_join(total_amount_tbl, by = c("candidate_name" = "candidate_name")) %>%
   select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type.y, total_amount)
 ```
