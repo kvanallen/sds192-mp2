@@ -87,9 +87,6 @@ ca_districts <- districts_eliminate %>%
   inner_join(contributions_eliminate, by = c("district", "district"))
 ca_districts$transaction_type.y <- factor(ca_districts$transaction_type.y)
   #includes only districts that have both 24E for winners and 24A for losers
-<<<<<<< HEAD
-```
-=======
 ```
 
 ```{r}
@@ -97,5 +94,33 @@ ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transacti
   geom_bar(stat = "identity", position = "fill")
 ```
 
+```{r}
+final_plot <- function(state_arg) {
+  state_house_contributions <- small_house_contributions %>%
+  filter(state.x == state_arg, transaction_type == "24A" | transaction_type == "24E")
+  total_amount_any_state <- state_house_contributions %>%
+      group_by(candidate_name, transaction_type) %>%
+      summarize(total_amount = sum(transaction_amt))
+  big_any_state_contributions <- state_house_contributions %>%
+  full_join(total_amount_any_state, by = c("candidate_name" = "candidate_name")) %>%
+  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type.y, total_amount) %>%
+  arrange(district)
+  small_any_state_contributions <- unique(big_any_state_contributions)
+  contributions_eliminate_function <- small_any_state_contributions %>%
+  filter((ge_winner == "W" & transaction_type.y == "24E") | (ge_winner == "N" & transaction_type.y == "24A"))
+  districts_eliminate_function <- contributions_eliminate_function %>%
+  group_by(district) %>%
+  summarize(N = n()) %>%
+  filter(N == 2)
+any_state_districts <- districts_eliminate_function %>%
+  inner_join(contributions_eliminate_function, by = c("district", "district"))
+any_state_districts$transaction_type.y <- factor(any_state_districts$transaction_type.y)
+ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
+  geom_bar(stat = "identity", position = "fill")
+}
+```
 
->>>>>>> 9ad5da2e6ae20531c83821f4fac9d9dc5813c890
+```{r}
+final_plot("MA")
+```
+
