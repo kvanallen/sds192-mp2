@@ -61,8 +61,12 @@ total_amount_tbl <- ca_house_contributions %>%
 ```
 
 ```{r}
-small_ca_contributions <- ca_house_contributions %>%
+big_ca_contributions <- ca_house_contributions %>%
   full_join(total_amount_tbl, by = c("candidate_name" = "candidate_name")) %>%
   select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type.y, total_amount) %>%
   arrange(district) #joins ca_house_contributions with total_amount_tbl to get the information of the former with the total from the latter
+```
+
+```{r}
+small_ca_contributions <- unique(big_ca_contributions)
 ```
