@@ -46,3 +46,14 @@ small_house_contributions <- small_house %>%
   select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt)
 ```
 
+```{r}
+total_amount_tbl <- small_house_contributions %>%
+  group_by(candidate_name, transaction_type) %>%
+  summarize(total_amount = sum(transaction_amt))
+```
+
+```{r}
+smaller_house_contributions <- small_house_contributions %>%
+  full_join(total_amount_tbl, by = c("candidate_name" = "candidate_name")) %>%
+  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type.y, total_amount)
+```
