@@ -71,3 +71,15 @@ big_ca_contributions <- ca_house_contributions %>%
 small_ca_contributions <- unique(big_ca_contributions)
 #gets rid of duplicates from big_ca_contributions
 ```
+
+```{r}
+contributions_eliminate <- small_ca_contributions %>%
+  filter((ge_winner == "W" & transaction_type.y == "24E") | (ge_winner == "N" & transaction_type.y == "24A")) #selects only 24E contributions for winners and 24A contributions for losers
+```
+
+```{r}
+districts_eliminate <- contributions_eliminate %>%
+  group_by(district) %>%
+  summarize(N = n()) %>%
+  filter(N == 2) #includes only districts that have both 24E for winners and 24A for losers
+```
