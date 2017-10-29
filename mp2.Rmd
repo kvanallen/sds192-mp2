@@ -94,7 +94,7 @@ ca_districts$transaction_type.y <- factor(ca_districts$transaction_type.y)
 
 ```{r}
 ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
-  geom_area(position = "fill")
+  geom_bar(stat = "identity", position = "fill")
 ```
 
 
