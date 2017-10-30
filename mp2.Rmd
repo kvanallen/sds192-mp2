@@ -121,6 +121,6 @@ ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = tr
 ```
 
 ```{r}
-final_plot("MA")
+final_plot("IN")
 ```
 
