@@ -126,9 +126,8 @@ ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = tr
   geom_bar(stat = "identity", position = "fill") +
   scale_fill_discrete(name = "Transaction Type", labels = c('money spent against the loser', 'money spent for the winner')) +
   ylab("Money Spent by Percent") +
-  xlab("Districts in state_arg")
+  xlab(paste("Districts in", state_arg))
 }
-
 ```
 
 ```{r}
