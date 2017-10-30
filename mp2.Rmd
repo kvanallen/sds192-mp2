@@ -91,9 +91,6 @@ ca_districts$transaction_type.y <- factor(ca_districts$transaction_type.y)
 
 ```{r}
 ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
-<<<<<<< HEAD
-  geom_bar(stat = "identity", position = "fill") 
-=======
   geom_bar(stat = "identity", position = "fill") +
   scale_fill_discrete(name = "Transaction Type", labels = c('money spent against the loser', 'money spent for the winner'))
 ```
@@ -102,7 +99,7 @@ ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transacti
 24A = % of money spent against the loser
 24E = %  of money spent for the winner
 
-=======
+
 ```{r}
 final_plot <- function(state_arg) {
   state_house_contributions <- small_house_contributions %>%
@@ -127,12 +124,12 @@ any_state_districts$transaction_type.y <- factor(any_state_districts$transaction
 ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
   geom_bar(stat = "identity", position = "fill")
 }
->>>>>>> 0b68ca3fa243d65eeeac3bd5219ffbc4011ef0b3
+
 ```
 
 ```{r}
 final_plot("MA")
 ```
->>>>>>> 80402178463229fda08bd9ff364228033c8f167c
+
 
 
