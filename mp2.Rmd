@@ -94,16 +94,12 @@ ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transacti
   geom_bar(stat = "identity", position = "fill") +
   scale_fill_discrete(name = "Money Spent in CA", labels = c('money spent against the loser', 'money spent for the winner')) +
   ylab("Money Spent by Percent") +
-  xlab("District's in CA")
+  xlab("Districts in CA")
 ```
 
 24A = % of money spent against the loser
 24E = %  of money spent for the winner
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 382a7798df06ee6ba2895e5d703fda09795032d8
 ```{r}
 final_plot <- function(state_arg) {
   state_house_contributions <- small_house_contributions %>%
@@ -127,24 +123,13 @@ any_state_districts <- districts_eliminate_function %>%
 any_state_districts$transaction_type.y <- factor(any_state_districts$transaction_type.y)
 ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
   geom_bar(stat = "identity", position = "fill") +
-  scale_fill_discrete(name = "Transaction Type", labels = c('money spent against the loser', 'money spent for the winner'))
+  scale_fill_discrete(name = "Transaction Type", labels = c('money spent against the loser', 'money spent for the winner')) +
+  ylab("Money Spent by Percent") +
+  xlab("Districts in state_arg")
 }
 
 ```
 
 ```{r}
-<<<<<<< HEAD
 final_plot("IN") 
 ```
-=======
-<<<<<<< HEAD
-final_plot("MA")
-```
-
-
-
-=======
-final_plot("IN")
-```
->>>>>>> 382a7798df06ee6ba2895e5d703fda09795032d8
->>>>>>> e238c41fff48c365a749c10b1a49904ac8cb700f
