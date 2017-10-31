@@ -140,6 +140,7 @@ ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = tr
 ```{r}
 states <- c("AZ", "CA",  "CO", "CT", "FL", "GA", "HI", "IL", "IN", "IA", "KY", "LA", "MD", "MA", "MI", "MN", "NV", "NH", "NJ", "NY", "NC", "ND", "OH", "PA", "RI", "TX", "UT", "WA", "WV", "WI")
 lapply(states, FUN = final_plot)
+#this selects only the states that had at least one district with both 24E contributions for the winner and 24A contributions for the loser and applies the above function to them.
 ```
 
 
