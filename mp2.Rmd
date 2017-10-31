@@ -1,5 +1,5 @@
 ---
-title: "Mini-Project 2"
+title: "For or Against? A Breakdown of Campaign Spending"
 author: "Emma Livingston, Clara Rosenberg, and Kara VanAllen"
 date: "October 31, 2017"
 output: html_document
