@@ -7,7 +7,7 @@ output: html_document
 
 ## Context and Background
 
-We took information from the Federal Election Committee (FEC) to look at the ratios between contributions for and against candidates. The FEC provides information every election cycle on the candidates, the contributions of committees, and the committees making contributions. Looking at the 2011-2012  general election cycle for the House of Representatives, we looked at the contributions for and against the candidates. Since some transactions are for a certain candidate and other transactions are against a certain candidate, we wanted to know what the ratio was between money given for the election of the winning candidate, in contrast with the money given against the election of the losing candidate. Essentially, if any committee wants Joe Smith to win in a certain district, what is the winning combination of donations for Joe Smith and against Smith's opponent? 
+We took information from the Federal Election Committee (FEC) to look at the ratios between contributions for and against candidates. The FEC provides information every election cycle on the candidates, the contributions of committees, and the committees making contributions. In the 2011-2012 general election cycle for the House of Representatives, we looked at the contributions for and against the candidates. Since some transactions are for a certain candidate and other transactions are against a certain candidate, we wanted to know what the ratio was between money given for the election of the winning candidate, in contrast with the money given against the election of the losing candidate. Essentially, if any committee wants Joe Smith to win in a certain district, what is the winning combination of donations for Joe Smith and against Smith's opponent? 
 
 ```{r, include=FALSE}
 load("house_elections.rda")
@@ -22,7 +22,7 @@ library(tidyverse)
 
 ```{r}
 general_house <- house_elections %>%
-  filter(general_votes != 0) #filter the house_elections data down to only the general elections
+  filter(general_votes != 0) #filters the house_elections data down to only the general elections
 num_candidates <- general_house %>%
   arrange(state, district) %>%
   group_by(state, district) %>%
@@ -33,27 +33,27 @@ num_candidates <- general_house %>%
 
 ```{r}
 house_candidates <- filter(candidates, cand_office == "H")
-#filter so that the candidates table only includes candidates running for the house of representatives
+#filters so that the candidates table only includes candidates running for the house of representatives
 ```
 
 ```{r}
 small_house <- general_house %>%
   full_join(house_candidates, by = c("fec_id" = "cand_id")) %>%
   select(fec_id, state, district, incumbent, candidate_name, party, general_votes, ge_winner)
-#join general_house and house_candidates to connect information about election results
+#joins general_house and house_candidates to connect information about election results
 ```
 
 ```{r}
 small_house_contributions <- small_house %>%
   full_join(contributions, by = c("fec_id" = "cand_id")) %>%
   select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt)
-#join small_house and contributions to connect election results, candidates, and contributions
+#joins small_house and contributions to connect election results, candidates, and contributions
 ```
 
 ```{r}
 ca_house_contributions <- small_house_contributions %>%
   filter(state.x == "CA", transaction_type == "24A" | transaction_type == "24E")
-#bring the house contributions table down to California, and only transactions of type 24A and 24E
+#brings the house contributions table down to California, and only transactions of type 24A and 24E
 ```
 
 ```{r}
@@ -100,10 +100,9 @@ ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transacti
   scale_fill_manual(name = "Transaction Type", labels = c('money spent against the loser', 'money spent to support the winner'), values=c("#d01c8b", "#4dac26")) +
   ylab("Money Spent by Percent") +
   xlab("Districts in CA")
-#plot the data so that each district's bar is the same height and the division between the two colors represents the proportion for each of the two categories
+#plots the data so that each district's bar is the same height and the division between the two colors represents the proportion for each of the two categories
 ```
-#Goal
-This first section of code and graph is how we 
+This graph and previous code showes the summation of of our work towards wrangling the data we wanted out of the original two tables, specifically using looking at California.  The following code shows how we created a function to apply this to all states.
 
 ```{r}
 final_plot <- function(state_arg) {
