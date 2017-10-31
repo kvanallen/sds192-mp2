@@ -1,13 +1,13 @@
 ---
 title: "Mini-Project 2"
-author: "Kara VanAllen"
+author: "Emma Livingston, Clara Rosenberg, and Kara VanAllen"
 date: "October 31, 2017"
 output: html_document
 ---
 
 ## Context and Background
 
-We took information from the Federal Election Committee (FEC) to look at the ratios between contributions for and against candidates. The FEC provides information every election cycle on the candidates, the contributions of committees, and the committees making contributions. Looking at the 2011-2012  general election cycle for the House of Representatives, we looked at the contributions for and against the candidate. Since some transactions are for a certain candidate and other transactions are against a certain candidate, we wanted to know what the ratio was between money given for the election of the winning candidate, in contrast with the money given against the election of the losing candidate. Essentially, if a committee wants John Doe to win in a certain district, what is the winning combination of donations for John Doe and against Doe's opponent? 
+We took information from the Federal Election Committee (FEC) to look at the ratios between contributions for and against candidates. The FEC provides information every election cycle on the candidates, the contributions of committees, and the committees making contributions. Looking at the 2011-2012  general election cycle for the House of Representatives, we looked at the contributions for and against the candidates. Since some transactions are for a certain candidate and other transactions are against a certain candidate, we wanted to know what the ratio was between money given for the election of the winning candidate, in contrast with the money given against the election of the losing candidate. Essentially, if any committee wants Joe Smith to win in a certain district, what is the winning combination of donations for Joe Smith and against Smith's opponent? 
 
 ```{r, include=FALSE}
 load("house_elections.rda")
@@ -143,6 +143,11 @@ lapply(states, FUN = final_plot)
 
 
 ## Summary
+
 For any state, this graphic takes information about the 2012 house elections and maps, per district, the percent of money, spent by any committee, in support of the candidate who won against the percent of money, spent by any committee, in opposition of the candidate who lost. Not all states and districts are included because not all districts had both 24E contributions for the winner and 24A contributions for the loser, and not every state has at least one such district. This limits the ability to apply these trends to all districts, but is a good graph for only considering these kinds of districts.
 By using past trends to predict the future, we can learn where to spend money to make it most effective in getting your desired outcome.
+
+Looking at these graphs, the take away is that almost all of the districts that meet the criteria spend over 75% of their money either in favor of the candidate who won, or in opposition to the candidate who lost. This means that the divide between money for the winner and money against the loser is not typically an even split. If we were to perform a statistical analysis of these data, we would likely see that it is more effective from a campaign finance standpoint to focus funds one way or the other to elect the candidate of choice.
+
 Take New York for example.  Over 75% of money spent in each of those individual district campaigns were spend 'against the loser'.  Clearly, those New York voters are more receptive to negative propaganda than they are to positive.
+
