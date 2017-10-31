@@ -136,4 +136,6 @@ final_plot("NY")
 
 
 ## Summary
-
+For any state, this graphic takes information about the 2012 house elections and maps, per district, the percent of money, spent by any committee, in support of the candidate who won against the percent of money, spent by any committee, in opposition of the candidate who lost.
+By using past trends to predict the future, we can learn where to spend money to make it most effective in getting your desired outcome.
+Take New York for example.  Over 75% of money spent in each of those individual district campaigns were spend 'against the loser'.  Clearly, those New York voters are more receptive to negative propaganda than they are to positive.
