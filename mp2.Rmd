@@ -97,7 +97,7 @@ ca_districts$transaction_type.y <- factor(ca_districts$transaction_type.y)
 ```{r}
 ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
   geom_bar(stat = "identity", position = "fill") +
-  scale_fill_discrete(name = "Money Spent in CA", labels = c('money spent against the loser', 'money spent for the winner')) +
+  scale_fill_manual(name = "Transaction Type", labels = c('money spent against the loser', 'money spent to support the winner'), values=c("#d01c8b", "#4dac26")) +
   ylab("Money Spent by Percent") +
   xlab("Districts in CA")
 #plot the data so that each district's bar is the same height and the division between the two colors represents the proportion for each of the two categories
@@ -130,7 +130,7 @@ any_state_districts <- districts_eliminate_function %>%
 any_state_districts$transaction_type.y <- factor(any_state_districts$transaction_type.y)
 ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = transaction_type.y)) +
   geom_bar(stat = "identity", position = "fill") +
-  scale_fill_discrete(name = "Transaction Type", labels = c('money spent against the loser', 'money spent for the winner')) +
+  scale_fill_manual(name = "Transaction Type", labels = c('money spent against the loser', 'money spent to support the winner'), values=c("#d01c8b", "#4dac26")) +
   ylab("Money Spent by Percent") +
   xlab(paste("Districts in", state_arg))
 }
