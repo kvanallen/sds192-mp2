@@ -28,23 +28,26 @@ num_candidates <- general_house %>%
   group_by(state, district) %>%
   summarize(N = n()) %>% #number of candidates in a district
   filter(N == 1) #1 candidate means there was only one candidate running in that district
-# num_candidates looks at how many candidates ran unopposed in the house election. Since there are only eight who ran unoppoosed, and we are looking primarily at California, we decided that we did not need to make a change to the data based on that information. 
+#num_candidates looks at how many candidates ran unopposed in the house election. Since there are only eight who ran unoppoosed, and we are looking primarily at California, we decided that we did not need to make a change to the data based on that information. 
 ```
 
 ```{r}
-house_candidates <- filter(candidates, cand_office == "H") #filter so that the candidates table only includes candidates running for the house of representatives
+house_candidates <- filter(candidates, cand_office == "H")
+#filter so that the candidates table only includes candidates running for the house of representatives
 ```
 
 ```{r}
 small_house <- general_house %>%
   full_join(house_candidates, by = c("fec_id" = "cand_id")) %>%
-  select(fec_id, state, district, incumbent, candidate_name, party, general_votes, ge_winner) #join general_house and house_candidates to connect information about election results
+  select(fec_id, state, district, incumbent, candidate_name, party, general_votes, ge_winner)
+#join general_house and house_candidates to connect information about election results
 ```
 
 ```{r}
 small_house_contributions <- small_house %>%
   full_join(contributions, by = c("fec_id" = "cand_id")) %>%
-  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt) #join small_house and contributions to connect election results, candidates, and contributions
+  select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type, transaction_amt)
+#join small_house and contributions to connect election results, candidates, and contributions
 ```
 
 ```{r}
@@ -57,14 +60,16 @@ ca_house_contributions <- small_house_contributions %>%
 total_amount_tbl <- ca_house_contributions %>%
   group_by(candidate_name, transaction_type) %>%
   summarize(total_amount = sum(transaction_amt)) %>%
-  filter(!is.na(transaction_type)) #condenses ca_house_contributions so that there is one row per candidate per contribution type
+  filter(!is.na(transaction_type))
+#condenses ca_house_contributions so that there is one row per candidate per contribution type
 ```
 
 ```{r}
 big_ca_contributions <- ca_house_contributions %>%
   full_join(total_amount_tbl, by = c("candidate_name" = "candidate_name")) %>%
   select(fec_id, state.x, district, incumbent, candidate_name, party, general_votes, ge_winner, transaction_type.y, total_amount) %>%
-  arrange(district) #joins ca_house_contributions with total_amount_tbl to get the information of the former with the total from the latter
+  arrange(district)
+#joins ca_house_contributions with total_amount_tbl to get the information of the former with the total from the latter
 ```
 
 ```{r}
@@ -95,6 +100,7 @@ ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transacti
   scale_fill_discrete(name = "Money Spent in CA", labels = c('money spent against the loser', 'money spent for the winner')) +
   ylab("Money Spent by Percent") +
   xlab("Districts in CA")
+#plot the data so that each district's bar is the same height and the division between the two colors represents the proportion for each of the two categories
 ```
 
 24A = % of money spent against the loser
@@ -128,6 +134,7 @@ ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = tr
   ylab("Money Spent by Percent") +
   xlab(paste("Districts in", state_arg))
 }
+#this function takes the process outlined above, starting when ca_house_contributions (the first state-specific table) was made, and applies it to any state. names of intermediate tables are changed so as to apply to all states and to avoid confusion.
 ```
 
 ```{r}
@@ -141,6 +148,6 @@ final_plot("NY")
 
 
 ## Summary
-For any state, this graphic takes information about the 2012 house elections and maps, per district, the percent of money, spent by any committee, in support of the candidate who won against the percent of money, spent by any committee, in opposition of the candidate who lost.
+For any state, this graphic takes information about the 2012 house elections and maps, per district, the percent of money, spent by any committee, in support of the candidate who won against the percent of money, spent by any committee, in opposition of the candidate who lost. Not all states and districts are included because not all districts had both 24E contributions for the winner and 24A contributions for the loser, and not every state has at least one such district. This limits the ability to apply these trends to all districts, but is a good graph for only considering these kinds of districts.
 By using past trends to predict the future, we can learn where to spend money to make it most effective in getting your desired outcome.
 Take New York for example.  Over 75% of money spent in each of those individual district campaigns were spend 'against the loser'.  Clearly, those New York voters are more receptive to negative propaganda than they are to positive.
