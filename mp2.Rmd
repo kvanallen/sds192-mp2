@@ -96,10 +96,8 @@ ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transacti
   ylab("Money Spent by Percent") +
   xlab("Districts in CA")
 ```
-
-24A = % of money spent against the loser
-24E = %  of money spent for the winner
-
+#Goal
+This first graph is how 
 
 ```{r}
 final_plot <- function(state_arg) {
