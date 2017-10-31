@@ -138,12 +138,8 @@ ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = tr
 ```
 
 ```{r}
-<<<<<<< HEAD
-final_plot("IN")
-lapply()
-=======
-final_plot("NY") 
->>>>>>> 2a95d31dac5ed5d12a969f5187f9af4680c37381
+states <- c("AK", "AZ", "AR",  "CA",  "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY")
+lapply(states, FUN = final_plot)
 ```
 
 
