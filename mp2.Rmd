@@ -7,7 +7,7 @@ output: html_document
 
 ## Context and Background
 
-We took information from the Federal Election Committee (FEC) to look at the ratios between contributions for and against candidates. The FEC provides information every election cycle on the candidates, the contributions of committees, and the committees making contributions. Looking at the 2011-2012  general election cycle for the House of Representatives, we looked at the contributions for and against the candidate. Since some transactions are for a certain candidate and others are against a certain candidate, we wanted to know what the ratio was between money given for the election of the winning candidate, in contrast with the money given against the election of the losing candidate. Essentially, if a committee wants John Doe to win in a certain district, what is the winning combination of donations for John Doe and against Doe's opponent? 
+We took information from the Federal Election Committee (FEC) to look at the ratios between contributions for and against candidates. The FEC provides information every election cycle on the candidates, the contributions of committees, and the committees making contributions. Looking at the 2011-2012  general election cycle for the House of Representatives, we looked at the contributions for and against the candidate. Since some transactions are for a certain candidate and other transactions are against a certain candidate, we wanted to know what the ratio was between money given for the election of the winning candidate, in contrast with the money given against the election of the losing candidate. Essentially, if a committee wants John Doe to win in a certain district, what is the winning combination of donations for John Doe and against Doe's opponent? 
 
 ```{r, include=FALSE}
 load("house_elections.rda")
@@ -136,7 +136,8 @@ ggplot(data = any_state_districts, aes(x = district, y = total_amount, fill = tr
 ```
 
 ```{r}
-final_plot("NY") 
+states <- c("AK", "AZ", "AR",  "CA",  "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY")
+lapply(states, FUN = final_plot)
 ```
 
 
