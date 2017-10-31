@@ -103,7 +103,7 @@ ggplot(data = ca_districts, aes(x = district, y = total_amount, fill = transacti
 #plot the data so that each district's bar is the same height and the division between the two colors represents the proportion for each of the two categories
 ```
 #Goal
-This first graph is how 
+This first section of code and graph is how we 
 
 ```{r}
 final_plot <- function(state_arg) {
